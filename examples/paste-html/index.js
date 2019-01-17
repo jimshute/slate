@@ -12,7 +12,8 @@ import styled from 'react-emotion'
  * @type {Object}
  */
 
-const initialValue = Value.fromJSON(initialValueAsJson)
+// const initialValue = Value.fromJSON(initialValueAsJson)
+
 
 /**
  * Tags to blocks.
@@ -152,6 +153,8 @@ const RULES = [
  */
 
 const serializer = new Html({ rules: RULES })
+
+const initialValue = serializer.deserialize('<p>Hello, <br/></p>');
 
 /**
  * The pasting html example.

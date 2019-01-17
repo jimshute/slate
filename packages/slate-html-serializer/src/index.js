@@ -203,7 +203,20 @@ class Html {
 
       switch (typeOf(node)) {
         case 'array':
-          nodes = nodes.concat(node)
+          console.log(nodes);
+          nodes = nodes.concat(node.reduce((result, n, index) => {
+            if (index > 0) {
+              let lastResultNode = result.pop();
+              if (n.object === 'text' && lastResultNode.object === 'text') {
+                lastResultNode.leaves = [...lastResultNode.leaves, ...n.leaves]
+              }
+              result.push(lastResultNode);
+            } else {
+              result.push(n)
+            }
+            return result;
+          }, []))
+          console.log(nodes);
           break
         case 'object':
           nodes.push(node)
